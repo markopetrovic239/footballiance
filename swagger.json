@@ -1,0 +1,95 @@
+{
+  "swagger": "2.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "x-code"
+  },
+  "schemes": [
+    "http"
+  ],
+  "host": "localhost:3000",
+  "basePath": "/v1",
+  "securityDefinitions": {
+    "auth": {
+      "type": "apiKey",
+      "description": "jwt authetication token",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "paths": {
+    "/auth/test": {
+      "get": {
+        "tags": [
+          "Test"
+        ],
+        "security": [{
+          "auth": []
+        }],
+        "summary": "Test API",
+        "description": "",
+        "operationId": "test",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Login API",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [{
+          "in": "body",
+          "name": "body",
+          "description": "",
+          "schema": {
+            "type": "object",
+            "required": [
+              "email",
+              "password"
+            ],
+            "properties": {
+              "email": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              },
+              "device_type": {
+                "type": "string"
+              },
+              "device_id": {
+                "type": "string"
+              },
+              "device_token": {
+                "type": "string"
+              }
+            }
+          }
+        }],
+        "responses": {
+          "400": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    }
+  }
+}

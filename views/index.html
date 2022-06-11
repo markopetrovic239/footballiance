@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Node.js Framework</title>
+    <script src='/socket.io/socket.io.js'></script>
+    <script>
+    var socket = io('/v1/xcode');
+
+    socket.on('disconnect', console.log.bind(console));
+
+    socket.on('connected', function(data) {
+        console.log('connected:->', data);
+    });
+    </script>
+    <script type="text/javascript">
+    function onClickOnSubmit() {
+        var key = document.getElementById('address').value || '';
+        var message = document.getElementById('message').value || '';
+
+        if (!key || !message) {
+            alert('Invalid parameter');
+            return;
+        }
+
+        try {
+            var json = eval("(" + message + ")");
+        } catch (e) {
+            var json = message;
+            console.log(e);
+        }
+
+        // console.log(key, json);
+        socket.emit(key, json, function(data) {
+            console.log('RESPONSE:->', data);
+        });
+    }
+    </script>
+</head>
+
+<body>
+    <ul id="chatMessage"></ul>
+    <form name='myForm'>
+        <table>
+            <tr>
+                <th>
+                    <label>Key</label>
+                </th>
+                <td>
+                    <select id="address" name="address">
+                        <option value="test">test</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th colspan="2">&nbsp;</th>
+            </tr>
+            <tr>
+                <th>
+                    <label>Message (string/json)</label>
+                </th>
+                <td>
+                    <textarea rows="25" cols="75" id="message"></textarea>
+                </td>
+            </tr>
+            <tr>
+                <th>&nbsp;</th>
+                <td>
+                    <input type="button" value="Send" name="" onclick="onClickOnSubmit()">
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,13 @@
+{
+  "apps": [{
+    "name": "x-code",
+    "script": "./bin/www",
+    "node_args":"-r babel-register",
+    "instances": "1",
+    "exec_mode": "cluster",
+    "ignore_watch": ["node_modules", "uploads"],
+    "watch_options": {
+      "followSymlinks": false
+    }
+  }]
+}
